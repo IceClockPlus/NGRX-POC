@@ -6,7 +6,7 @@ import { TODO_FEATURE_KEY, todoReducer } from '../../store/todos/todo.reducer';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
 import { TodoEffects } from '../../store/todos/todo.effects';
 import { selectTodos, selectTodosSummary } from '../../store/todos/todo.selector';
-import { loadTodoItems, markTodoAsComplete, unmarkTodoAsComplete } from '../../store/todos/todo.actions';
+import { loadTodoItems, markAllTodos, markTodoAsComplete, removeTodoItem, unmarkAllTodos, unmarkTodoAsComplete } from '../../store/todos/todo.actions';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -36,5 +36,17 @@ export class TodosComponent implements OnInit{
       this.store.dispatch(unmarkTodoAsComplete({id}));
     else
       this.store.dispatch(markTodoAsComplete({id}));
+  }
+
+  public removeTodo(id: number) {
+    this.store.dispatch(removeTodoItem({id}));
+  }
+
+  public clickMarkAllTodos(){
+    this.store.dispatch(markAllTodos());
+  }
+
+  public clickUnmarkAllTodos() {
+    this.store.dispatch(unmarkAllTodos());
   }
 }

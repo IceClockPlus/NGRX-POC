@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import {loadTodoItems, addTodoItem, removeTodoItem, loadTodoItemsSuccess, markTodoAsComplete, unmarkTodoAsComplete} from './todo.actions';
+import {loadTodoItems, addTodoItem, removeTodoItem, loadTodoItemsSuccess, markTodoAsComplete, unmarkTodoAsComplete, markAllTodos, unmarkAllTodos} from './todo.actions';
 import { TodoItem } from './todo.model';
 import { INIT_TODO_STATE } from './todo.state';
 
@@ -29,5 +29,17 @@ export const todoReducer = createReducer(
   on(removeTodoItem, (state, {id}) => {
     const updatedTodos = state.todos.filter(t => t.id !== id);
     return {...state, todos: updatedTodos};
+  }),
+  on(markAllTodos, (state) => {
+    const markTodos = state.todos.map(todo =>
+      todo.completed === false ? {...todo, completed: true} : todo
+    )
+    return {...state, todos: markTodos}
+  }),
+  on(unmarkAllTodos, (state) =>{
+    const unmarkTodos = state.todos.map(todo => 
+      todo.completed === true ? {...todo, completed: false}: todo
+    );
+    return {...state, todos: unmarkTodos};
   })
 )

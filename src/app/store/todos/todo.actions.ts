@@ -23,3 +23,6 @@ export const unmarkTodoAsComplete = createAction('[Todo] Unmark Todo as complete
 export const removeTodoItem = createAction('[Todo] Remove todo item',
   props<{id: number}>()
 );
+
+export const markAllTodos = createAction('[Todo] Mark all');
+export const unmarkAllTodos = createAction('[Todo] Unmark all');
