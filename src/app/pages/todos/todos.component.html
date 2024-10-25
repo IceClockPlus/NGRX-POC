@@ -1,0 +1,12 @@
+<p>todos works!</p>
+<div>
+    <ol>
+        <li *ngFor="let todo of (todos$|async)">
+            <span (click)="markOrUnmarkTodo(todo)"
+            [ngStyle]="{'text-decoration': todo.completed ? 'line-through': 'none'}"
+            >
+                {{todo.title}}
+            </span>
+        </li>
+    </ol>
+</div>
