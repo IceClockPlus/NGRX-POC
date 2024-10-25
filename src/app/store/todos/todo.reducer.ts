@@ -25,5 +25,9 @@ export const todoReducer = createReducer(
     );
     return {...state, todos: updatedTodos};
 
+  }),
+  on(removeTodoItem, (state, {id}) => {
+    const updatedTodos = state.todos.filter(t => t.id !== id);
+    return {...state, todos: updatedTodos};
   })
 )

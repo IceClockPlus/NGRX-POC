@@ -1,4 +1,9 @@
 <p>todos works!</p>
+<div class="summary" *ngIf="todosSummary$ | async as todoSummary">
+    <span>Todos: {{todoSummary.all}}</span>
+    <span>Completed: {{todoSummary.completed}}</span>
+    <span>In progress: {{todoSummary.notCompleted}}</span>
+</div>
 <div>
     <ol>
         <li *ngFor="let todo of (todos$|async)">
