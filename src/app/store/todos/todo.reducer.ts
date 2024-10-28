@@ -1,10 +1,17 @@
 import { createReducer, on } from '@ngrx/store';
-import {loadTodoItems, addTodoItem, removeTodoItem, loadTodoItemsSuccess, markTodoAsComplete, unmarkTodoAsComplete, markAllTodos, unmarkAllTodos} from './todo.actions';
+import {loadTodoItems, addTodoItem, removeTodoItem, loadTodoItemsSuccess, markTodoAsComplete, unmarkTodoAsComplete, markAllTodos, unmarkAllTodos, updateItemOrder} from './todo.actions';
 import { TodoItem } from './todo.model';
 import { INIT_TODO_STATE } from './todo.state';
 
 
 export const TODO_FEATURE_KEY = 'todo'; // Feature key
+
+const reorderArray = (array: TodoItem[], previousIndex: number, currentIndex: number) => {
+  const updatedArray = [...array];
+  const [movedItem] = updatedArray.splice(previousIndex, 1);
+  updatedArray.splice(currentIndex,0, movedItem);
+  return updatedArray;
+};
 
 export const todoReducer = createReducer(
   INIT_TODO_STATE,
@@ -41,5 +48,9 @@ export const todoReducer = createReducer(
       todo.completed === true ? {...todo, completed: false}: todo
     );
     return {...state, todos: unmarkTodos};
+  }),
+  on(updateItemOrder, (state, {previousIndex, currentIndex}) => {
+    const updatedArray = reorderArray(state.todos, previousIndex, currentIndex);
+    return {...state, todos: updatedArray};
   })
 )

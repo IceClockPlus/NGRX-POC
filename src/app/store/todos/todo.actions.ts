@@ -26,3 +26,7 @@ export const removeTodoItem = createAction('[Todo] Remove todo item',
 
 export const markAllTodos = createAction('[Todo] Mark all');
 export const unmarkAllTodos = createAction('[Todo] Unmark all');
+
+export const updateItemOrder = createAction('[Todo] Move item',
+  props<{previousIndex: number, currentIndex: number}>()
+);
