@@ -6,14 +6,16 @@ import { TODO_FEATURE_KEY, todoReducer } from '../../store/todos/todo.reducer';
 import { EffectsModule, provideEffects } from '@ngrx/effects';
 import { TodoEffects } from '../../store/todos/todo.effects';
 import { selectTodos, selectTodosSummary } from '../../store/todos/todo.selector';
-import { loadTodoItems, markAllTodos, markTodoAsComplete, removeTodoItem, unmarkAllTodos, unmarkTodoAsComplete } from '../../store/todos/todo.actions';
+import { loadTodoItems, markAllTodos, markTodoAsComplete, removeTodoItem, unmarkAllTodos, unmarkTodoAsComplete, updateItemOrder } from '../../store/todos/todo.actions';
 import { CommonModule } from '@angular/common';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-todos',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    DragDropModule
   ],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
@@ -48,5 +50,11 @@ export class TodosComponent implements OnInit{
 
   public clickUnmarkAllTodos() {
     this.store.dispatch(unmarkAllTodos());
+  }
+
+  dropItem(event: CdkDragDrop<TodoItem[]>) {
+    if(event.previousIndex !== event.currentIndex) {
+      this.store.dispatch(updateItemOrder({previousIndex: event.previousIndex, currentIndex: event.currentIndex}));
+    }
   }
 }
