@@ -23,7 +23,10 @@
     [ngClass]="{
         'done-item': todo.completed,
         'pending-item': !todo.completed}">
-        <p (click)="markOrUnmarkTodo(todo)">
+        <div>
+            <input (change)="markOrUnmarkTodo(todo)" [checked]="todo.completed" type="checkbox">
+        </div>
+        <p>
             {{todo.title}} <button (click)="removeTodo(todo.id)">X</button>
         </p>
     </div>
