@@ -1,21 +1,22 @@
 <p>todos works!</p>
 <div class="summary" *ngIf="todosSummary$ | async as todoSummary">
-    <span>Todos: {{todoSummary.all}}</span>
-    <span>Completed: {{todoSummary.completed}}</span>
-    <span>In progress: {{todoSummary.notCompleted}}</span>
+    <div class="kpi-content">
+        <span class="label">Todo</span>
+        <span class="label-number">{{todoSummary.all | number}}</span>
+    </div>
+    <div class="kpi-content">
+        <span class="label pending-color">WIP</span>
+        <span class="label-number">{{todoSummary.notCompleted}}</span>
+    </div>
+
+    <div class="kpi-content">
+        <span class="label completed-color">Completed</span>
+        <span class="label-number">{{todoSummary.completed}}</span>
+    </div>
 </div>
 <div>
     <button (click)="clickUnmarkAllTodos()">Unmark all</button>
     <button (click)="clickMarkAllTodos()">Mark all</button>
-    <!-- <ol>
-        <li *ngFor="let todo of (todos$|async)">
-            <span (click)="markOrUnmarkTodo(todo)"
-            [ngStyle]="{'text-decoration': todo.completed ? 'line-through': 'none'}"
-            >
-                {{todo.title}} <button (click)="removeTodo(todo.id)">X</button>
-            </span>
-        </li>
-    </ol> -->
 </div>
 
 <div cdkDropList (cdkDropListDropped)="dropItem($event)" class="list-todo-section">

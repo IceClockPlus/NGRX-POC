@@ -1,8 +1,32 @@
 .summary {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+    .kpi-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .label {
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .label-number {
+        font-weight: 300;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 }
 
+.completed-color {
+    color: green;
+}
+
+.pending-color {
+    color: orange;
+}
 
 .list-todo-section {
     display: flex;
