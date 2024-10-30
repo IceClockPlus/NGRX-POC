@@ -9,6 +9,7 @@ import { selectTodos, selectTodosSummary } from '../../store/todos/todo.selector
 import { loadTodoItems, markAllTodos, markTodoAsComplete, removeTodoItem, unmarkAllTodos, unmarkTodoAsComplete, updateItemOrder } from '../../store/todos/todo.actions';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { fadeOutAnimation } from '../../animations/fadeOutAnimation';
 
 @Component({
   selector: 'app-todos',
@@ -19,8 +20,10 @@ import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
   ],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
+  animations: [fadeOutAnimation]
 })
 export class TodosComponent implements OnInit{
+  public showTodoTitle: boolean = true;
   public todos$!: Observable<TodoItem[]>;
   public todosSummary$ : Observable<TodoStoreSummary>;
   constructor(private store: Store){
@@ -50,6 +53,10 @@ export class TodosComponent implements OnInit{
 
   public clickUnmarkAllTodos() {
     this.store.dispatch(unmarkAllTodos());
+  }
+
+  public showHide(){
+    this.showTodoTitle = !this.showTodoTitle;
   }
 
   dropItem(event: CdkDragDrop<TodoItem[]>) {

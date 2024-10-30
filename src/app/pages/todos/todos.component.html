@@ -1,4 +1,5 @@
-<p>todos works!</p>
+<p @fadeOut *ngIf="showTodoTitle">todos works!</p>
+<button (click)="showHide()">Mostrar/Ocultar</button>
 <div class="summary" *ngIf="todosSummary$ | async as todoSummary">
     <div class="kpi-content">
         <span class="label">Todo</span>
@@ -20,7 +21,7 @@
 </div>
 
 <div cdkDropList (cdkDropListDropped)="dropItem($event)" class="list-todo-section">
-    <div cdkDrag class="todo-container" *ngFor="let todo of (todos$ | async)"
+    <div @fadeOut cdkDrag class="todo-container" *ngFor="let todo of (todos$ | async)"
     [ngClass]="{
         'done-item': todo.completed,
         'pending-item': !todo.completed}">
