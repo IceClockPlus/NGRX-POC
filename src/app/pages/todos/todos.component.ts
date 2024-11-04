@@ -10,14 +10,16 @@ import { loadTodoItems, markAllTodos, markTodoAsComplete, removeTodoItem, unmark
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 import { fadeOutAnimation } from '../../animations/fadeOutAnimation';
+import { TodoProgressBarComponent } from "./components/todo-progress-bar/todo-progress-bar.component";
 
 @Component({
   selector: 'app-todos',
   standalone: true,
   imports: [
     CommonModule,
-    DragDropModule
-  ],
+    DragDropModule,
+    TodoProgressBarComponent
+],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
   animations: [fadeOutAnimation]
