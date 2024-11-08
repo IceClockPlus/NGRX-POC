@@ -1,5 +1,6 @@
 <p @fadeOut *ngIf="showTodoTitle">todos works!</p>
 <todo-progress-bar></todo-progress-bar>
+
 <div class="summary" *ngIf="todosSummary$ | async as todoSummary">
     <div class="kpi-content">
         <span class="label">Todo</span>
